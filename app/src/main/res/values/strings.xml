@@ -1,5 +1,18 @@
 <resources>
     <string name="app_name">Art space</string>
-    <string name="image1Description">My own description to change</string>
+
+    <string name="image1Description">East Dover House - front</string>
     <integer name="image1Id">1</integer>
+    <string name="image1Artist">MacKay-Lyons Sweetapple Architects</string>
+    <integer name="image1Year">2010</integer>
+
+    <string name="image2Description">East Dover House - inside</string>
+    <integer name="image2Id">2</integer>
+    <string name="image2Artist">MacKay-Lyons Sweetapple Architects and Co</string>
+    <integer name="image2Year">2011</integer>
+
+    <string name="image3Description">East Dover House - back</string>
+    <integer name="image3Id">3</integer>
+    <string name="image3Artist">MacKay-Lyons Sweetapple Architects and others</string>
+    <integer name="image3Year">2012</integer>
 </resources>

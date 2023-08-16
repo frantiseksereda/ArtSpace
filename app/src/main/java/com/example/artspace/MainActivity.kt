@@ -16,9 +16,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.integerResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,6 +31,7 @@ import com.example.artspace.ui.theme.ArtSpaceTheme
 val image1 = Artwork()
 val image2 = Artwork()
 val image3 = Artwork()
+val imagesToShow = mutableListOf<Artwork>(image1, image2, image3)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,18 +50,35 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-public class Artwork {
-    var imageId: Int = 0
+class Artwork {
+    var imageId: Int = R.drawable.house1
     var imageDescription: String = "Something"
     var title: String = "Some title"
     var artist: String = "Some artist"
     var year: Int = 0
 }
 
-
 @Composable
 fun ShowArt() {
-    image1.imageId = R.integer.image1Id
+    image1.imageId = R.drawable.house1
+    image1.imageDescription = stringResource(id = R.string.image1Description)
+    image1.artist = stringResource(id = R.string.image1Artist)
+    image1.title = stringResource(id = R.string.image1Description)
+    image1.year = integerResource(id = R.integer.image1Year)
+
+    image2.imageId = R.drawable.house2
+    image2.imageDescription = stringResource(id = R.string.image2Description)
+    image2.artist = stringResource(id = R.string.image2Artist)
+    image2.title = stringResource(id = R.string.image2Description)
+    image2.year = integerResource(id = R.integer.image2Year)
+
+    image3.imageId = R.drawable.house3
+    image3.imageDescription = stringResource(id = R.string.image3Description)
+    image3.artist = stringResource(id = R.string.image3Artist)
+    image3.title = stringResource(id = R.string.image3Description)
+    image3.year = integerResource(id = R.integer.image3Year)
+
+    var currentImage by remember {mutableStateOf(0)}
 
     Column(
         modifier = Modifier.padding(24.dp),
@@ -70,8 +91,8 @@ fun ShowArt() {
 
         ) {
             Image(
-                painter = painterResource(id = R.drawable.house3),
-                contentDescription = "Image",
+                painter = painterResource(id = imagesToShow[currentImage].imageId),
+                contentDescription = imagesToShow[currentImage].imageDescription,
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
@@ -84,14 +105,14 @@ fun ShowArt() {
         ) {
             Row() {
                 Text(
-                    text = "Artwork Title",
+                    text = imagesToShow[currentImage].title,
                     fontSize = 24.sp,
                     textAlign = TextAlign.Center
                 )
             }
             Row() {
                 Text(
-                    text = "Artwork Artist (Year)",
+                    text = "${imagesToShow[currentImage].artist} (${imagesToShow[currentImage].year})",
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center
                 )
@@ -102,7 +123,9 @@ fun ShowArt() {
         ) {
             Column(modifier = Modifier.padding(8.dp)) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = { if (currentImage == 0) {
+                        currentImage = 2
+                    } else currentImage -= 1 },
                     modifier = Modifier.fillMaxWidth(0.5F)
                 ) {
                     Text(text = "Previous")
@@ -110,7 +133,11 @@ fun ShowArt() {
             }
             Column(modifier = Modifier.padding(8.dp)) {
                 Button(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        if (currentImage == 2) {
+                            currentImage = 0
+                        } else currentImage += 1
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "Next")
