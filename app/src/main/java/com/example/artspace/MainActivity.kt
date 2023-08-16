@@ -25,6 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.artspace.ui.theme.ArtSpaceTheme
 
+val image1 = Artwork()
+val image2 = Artwork()
+val image3 = Artwork()
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,20 +46,23 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+public class Artwork {
+    var imageId: Int = 0
+    var imageDescription: String = "Something"
+    var title: String = "Some title"
+    var artist: String = "Some artist"
+    var year: Int = 0
+}
+
+
 @Composable
 fun ShowArt() {
+    image1.imageId = R.integer.image1Id
+
     Column(
         modifier = Modifier.padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Row(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        ) {
-            Text(
-                text = "There will be art",
-                fontSize = 24.sp
-            )
-        }
         Row(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
@@ -63,9 +70,11 @@ fun ShowArt() {
 
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                painter = painterResource(id = R.drawable.house3),
                 contentDescription = "Image",
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight()
             )
         }
         Column(

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Art space</string>
+    <string name="image1Description">My own description to change</string>
+    <integer name="image1Id">1</integer>
 </resources>
